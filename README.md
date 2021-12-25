@@ -1,0 +1,2 @@
+# BaseCoreFlutter
+Use GetX.
