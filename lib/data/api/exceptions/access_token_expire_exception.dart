@@ -1,0 +1,1 @@
+class AccessTokenExpireException implements Exception {}

@@ -1,0 +1,10 @@
+const DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
+const DATE_TIME_FORMAT2 = "dd/MM/yyyy HH:mm";
+const DATE_FORMAT = "dd/MM/yyyy";
+const TIME_FORMAT = "HH:mm";
+final minDate = DateTime(1900, 1, 1, 0, 0, 0);
+final maxDate = DateTime(3000, 1, 1, 0, 0, 0);
+const MIN_YEAR_OLD_USED_APP = 18;
+const PAGE = 1;
+const PAGE_SIZE = 10;
+const PAGE_SIZE_MAX = 100;

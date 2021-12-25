@@ -1,0 +1,1 @@
+class RefreshTokenExpireException implements Exception {}

@@ -1,0 +1,63 @@
+{
+  "uploadedUrl": "https://vestiums-uploaded-images-staging.s3.eu-west-3.amazonaws.com/products/1635227200954_16578.png",
+  "executedScript": "python3 /home/ubuntu/VestiumStaging/vestiums-main-api-master/dist/modules/upload/remove-background/vestiums.py --image /home/ubuntu/VestiumStaging/vestiums-main-api-master/dist/modules/upload/images/1635227200954_16578.jpeg --output_dir /home/ubuntu/VestiumStaging/vestiums-main-api-master/dist/modules/upload/converted_file/ --model_dir /home/ubuntu/VestiumStaging/vestiums-main-api-master/dist/modules/upload/remove-background/saved_models",
+  "colors": [
+    {
+      "_id": "616eb7503ef2c97761a0239f",
+      "h": 90,
+      "s": 13,
+      "l": 38,
+      "name": "Camouflage Green",
+      "family": "60bbb448f4b0af586c791166",
+      "lmd": "D",
+      "from": {
+        "h": 76,
+        "s": 0,
+        "l": 25
+      },
+      "to": {
+        "h": 105,
+        "s": 26,
+        "l": 51
+      }
+    },
+    {
+      "_id": "616eb7503ef2c97761a0236d",
+      "h": 30,
+      "s": 13,
+      "l": 63,
+      "name": "Zorba",
+      "family": "60bbb448f4b0af586c79115a",
+      "lmd": "L",
+      "from": {
+        "h": 16,
+        "s": 0,
+        "l": 50
+      },
+      "to": {
+        "h": 45,
+        "s": 26,
+        "l": 76
+      }
+    },
+    {
+      "_id": "616eb7503ef2c97761a023a4",
+      "h": 90,
+      "s": 38,
+      "l": 63,
+      "name": "Asparagus",
+      "family": "60bbb448f4b0af586c791169",
+      "lmd": "L",
+      "from": {
+        "h": 76,
+        "s": 25,
+        "l": 50
+      },
+      "to": {
+        "h": 105,
+        "s": 51,
+        "l": 76
+      }
+    }
+  ]
+}
