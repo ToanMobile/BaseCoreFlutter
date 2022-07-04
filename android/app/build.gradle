@@ -9,12 +9,6 @@ if (localPropertiesFile.exists()) {
     }
 }
 
-def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file('key.properties')
-if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-}
-
 def flutterRoot = localProperties.getProperty('flutter.sdk')
 if (flutterRoot == null) {
     throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
@@ -36,6 +30,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     compileSdkVersion flutter.compileSdkVersion
+    ndkVersion flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -49,37 +44,20 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
-
+    compileSdkVersion 33
     defaultConfig {
-        applicationId "com.toanmobile.core.flutter.core"
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId "com.toan_mobile.base_flutter_getx"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
 
-    signingConfigs {
-        release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
-        }
-        debug {
-            keyAlias keystoreProperties['keyAliasDebug']
-            keyPassword keystoreProperties['keyPasswordDebug']
-            storeFile file(keystoreProperties['storeFileDebug'])
-            storePassword keystoreProperties['storePasswordDebug']
-        }
-    }
     buildTypes {
         release {
-            shrinkResources true
-            minifyEnabled true
-            signingConfig signingConfigs.release
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        debug {
             signingConfig signingConfigs.debug
         }
     }
@@ -88,6 +66,10 @@ android {
         dev {
             dimension "flavors"
             applicationIdSuffix ".dev"
+        }
+        staging {
+            dimension "flavors"
+            applicationIdSuffix ".staging"
         }
         prod {
             dimension "flavors"
@@ -101,7 +83,9 @@ flutter {
     def flavourName = getCurrentFlavour()
     if (flavourName == 'dev') {
         target = 'lib/flavors/main_develop.dart'
-    }  else {
+    } else if (flavourName == 'staging') {
+        target = 'lib/flavors/main_staging.dart'
+    } else {
         target = 'lib/flavors/main_production.dart'
     }
 }

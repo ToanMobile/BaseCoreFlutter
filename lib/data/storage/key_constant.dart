@@ -1,24 +1,21 @@
 //Constant service
-const PRODUCT = "PRODUCT";
-const VES_BRAND = "VES_BRAND";
-const VES_SET = "VES_SET";
-const NEW_LOOKS = "NEW_LOOKS";
-const BOUTIQUE = "BOUTIQUE";
+import 'package:flutter/material.dart';
 
-//Gender
-const MALE = "MALE";
-const FEMALE = "FEMALE";
-const OTHER = "OTHER";
+import '../../res/style.dart';
 
-enum HOME_TAB_BOTTOM { home, shit, favourite, calendar }
+const KEY_MAP = 'AIzaSyCnoK_EgBGQPSj6JKEmCBvMqiLfX8fV9Z4';
 
-enum HOME_TAB { NEW_LOOK, BOUTIQUE, CREATOR, SELL_CORNER, VESTIUMS, VES_CORNER, VES_SET, VESBRAND, FAVOURITE, CALENDAR, SUITCASE }
+final List<Tab> TAB_ESTIMATION = <Tab>[
+  Tab(child: Text(LocalString.documentTabDaft)),
+  Tab(child: Text(LocalString.documentTabProgress)),
+  Tab(child: Text(LocalString.documentTabSold)),
+  Tab(child: Text(LocalString.documentTabArchive)),
+];
 
-enum TYPE { HOME, FAVOURITE, NONE }
+final List<String> listSourceColor = <String>['Red', 'Blue', 'Black', 'White', 'Yellow', 'Gray', 'Green', 'Brown', 'Violet', 'Silver'];
 
-enum CATEGORY { color, category, subCategory, feature, material, season, pattern, dynamic }
+final List<String> listSourceFuelType = <String>['liquid', 'electric', 'mixed'];
+
+bool isDetailsFromEstimation = false;
 
 enum LOADING { non, loading, complete }
-
-//Vest-set, vest-brand, vest-conner, newlook là boutique
-//Boutique là item

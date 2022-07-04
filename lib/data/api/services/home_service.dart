@@ -1,78 +1,24 @@
 import 'dart:async';
 
-import 'package:core/data/api/models/response/home/core_model.dart';
 import 'package:sprintf/sprintf.dart';
 
-import '../api_constants.dart';
+import '../../../data/api/api_constants.dart';
+import '../../../data/api/models/response/request/request_entity.dart';
+import '../models/response/estimator/estimator_entity.dart';
 import 'base_service.dart';
 
 class HomeService extends BaseService {
+  static bool isOffline = true;
 
-  Future<List<CoreModel>> getListNewLook(int page, int pageSize, String? query) async {
-    dynamic response;
-    if (query != null) {
-      response = await get(sprintf(GET_NEW_LOOK + pageSizeAndFilter, [page, pageSize, query]));
-    } else {
-      response = await get(sprintf(GET_NEW_LOOK + pageAndSize, [page, pageSize]));
-    }
-    final items = List<CoreModel>.from(response.map((item) => CoreModel.fromJson(item)));
-    //logPrint('getListNewLook::'+ response.toString());
+  Future<List<RequestEntity>> getListEstimation(String status, int page, int pageSize) async {
+    final response = await get(sprintf(GET_ESTIMATION, [page, pageSize, status]));
+    final items = List<RequestEntity>.from(response.map((item) => RequestEntity.fromJson(item)));
     return items;
   }
 
-  Future<List<CoreModel>> getListBoutique(int page, int pageSize, String? query) async {
-    dynamic response;
-    if (query != null) {
-      response = await get(sprintf(GET_BOUTIQUE + pageSizeAndFilter, [page, pageSize, query]));
-    } else {
-      response = await get(sprintf(GET_BOUTIQUE + pageAndSize, [page, pageSize]));
-    }
-    final items = List<CoreModel>.from(response.map((item) => CoreModel.fromJson(item)));
+  Future<List<EstimatorEntity>> getListEstimator(int page, int pageSize) async {
+    final response = await get(sprintf(GET_ESTIMATOR, [page, pageSize]));
+    final items = List<EstimatorEntity>.from(response.map((item) => EstimatorEntity.fromJson(item)));
     return items;
   }
-
-  Future<List<CoreModel>> getListVestiums(int page, int pageSize, String? query) async {
-    dynamic response;
-    if (query != null) {
-      response = await get(sprintf(GET_VESTIUMS + pageSizeAndFilter, [page, pageSize, query]));
-    } else {
-      response = await get(sprintf(GET_VESTIUMS + pageAndSize, [page, pageSize]));
-    }
-    final items = List<CoreModel>.from(response.map((item) => CoreModel.fromJson(item)));
-    return items;
-  }
-
-  Future<List<CoreModel>> getListVesSet(int page, int pageSize, String? query) async {
-    dynamic response;
-    if (query != null) {
-      response = await get(sprintf(GET_VES_SET + pageSizeAndFilter, [page, pageSize, query]));
-    } else {
-      response = await get(sprintf(GET_VES_SET + pageAndSize, [page, pageSize]));
-    }
-    final items = List<CoreModel>.from(response.map((item) => CoreModel.fromJson(item)));
-    return items;
-  }
-
-  Future<List<CoreModel>> getListVestBrand(int page, int pageSize, String? query) async {
-    dynamic response;
-    if (query != null) {
-      response = await get(sprintf(GET_VES_BRAND + pageSizeAndFilter, [page, pageSize, query]));
-    } else {
-      response = await get(sprintf(GET_VES_BRAND + pageAndSize, [page, pageSize]));
-    }
-    final items = List<CoreModel>.from(response.map((item) => CoreModel.fromJson(item)));
-    return items;
-  }
-
-  Future<List<CoreModel>> getListProduct(int page, int pageSize, String? query) async {
-    dynamic response;
-    if (query != null) {
-      response = await get(sprintf(GET_PRODUCT + pageSizeAndFilter, [page, pageSize, query]));
-    } else {
-      response = await get(sprintf(GET_PRODUCT + pageAndSize, [page, pageSize]));
-    }
-    final items = List<CoreModel>.from(response.map((item) => CoreModel.fromJson(item)));
-    return items;
-  }
-
 }

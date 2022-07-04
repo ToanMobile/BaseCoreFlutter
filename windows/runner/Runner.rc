@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.toanmobile.core.flutter" "\0"
-            VALUE "FileDescription", "A new Flutter project." "\0"
+            VALUE "CompanyName", "com.toan_mobile" "\0"
+            VALUE "FileDescription", "base_flutter_getx" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "core" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2021 com.toanmobile.core.flutter. All rights reserved." "\0"
-            VALUE "OriginalFilename", "core.exe" "\0"
-            VALUE "ProductName", "core" "\0"
+            VALUE "InternalName", "base_flutter_getx" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 com.toan_mobile. All rights reserved." "\0"
+            VALUE "OriginalFilename", "base_flutter_getx.exe" "\0"
+            VALUE "ProductName", "base_flutter_getx" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

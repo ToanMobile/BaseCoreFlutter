@@ -1,0 +1,21 @@
+<svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="cy603f6y0a" x1="0%" x2="0%" y1="0%" y2="100%">
+            <stop offset="0%" stop-color="#EB0A1E" />
+            <stop offset="100%" stop-color="#660009" />
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <path d="M4 0h16c2.21 0 4 1.79 4 4v16c0 2.21-1.79 4-4 4H4c-2.21 0-4-1.79-4-4V4c0-2.21 1.79-4 4-4z"
+                    fill="url(#cy603f6y0a)"
+                    transform="translate(-318.000000, -312.000000) translate(318.000000, 312.000000)" />
+                <g fill="#FFF" fill-rule="nonzero">
+                    <path d="M9.25 0l-5 4.706-2.5-2.353L0 4l4.25 4L11 1.647 9.25 0z"
+                        transform="translate(-318.000000, -312.000000) translate(318.000000, 312.000000) translate(6.000000, 8.000000)" />
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

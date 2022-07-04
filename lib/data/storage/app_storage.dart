@@ -1,15 +1,19 @@
+// ignore_for_file: constant_identifier_names
+
 import 'dart:convert';
 
-import 'package:core/data/api/models/user_info.dart';
-import 'package:core/res/languages/localization_service.dart';
-import 'package:core/res/style.dart';
 import 'package:get_storage/get_storage.dart';
+
+import '../../data/api/models/response/login/user_entity.dart';
+import '../../res/languages/localization_service.dart';
+import '../../res/style.dart';
+import '../../share/libraries/logger/flutter_logger.dart';
 
 class AppStorage {
   late GetStorage box;
-  static const STORAGE_NAME = "BaseCore_storage";
-  static const USER_ACCESS_TOKEN = "user_access_token";
-  static const USER_REFRESH_TOKEN = "user_refresh_token";
+  static const STORAGE_NAME = "tradein_storage";
+  static const FCM_TOKEN = "fcm_token";
+  static const USER_TOKEN = "user_token";
   static const APP_USER_INFO = "app_user_info";
   static const APP_THEME = "app_theme";
   static const APP_LANGUAGE = "app_language";
@@ -19,31 +23,32 @@ class AppStorage {
     box = GetStorage(STORAGE_NAME);
   }
 
-  Future<void> saveUserAccessToken(String accessToken) async {
-    box.write(USER_ACCESS_TOKEN, accessToken);
+  Future<void> saveFcmToken(String accessToken) async {
+    box.write(FCM_TOKEN, accessToken);
   }
 
-  Future<String?> getUserAccessToken() async {
-    final token = await box.read(USER_ACCESS_TOKEN);
+  Future<String?> getFcmToken() async {
+    final token = await box.read(FCM_TOKEN);
     return token;
   }
 
-  Future<void> saveUserInfo(UserInfo user) async {
+  Future<void> saveUserInfo(UserEntity user) async {
     String json = jsonEncode(user.toJson());
+    Logger.e('saveUserInfo::' + user.toString());
     box.write(APP_USER_INFO, json);
   }
 
-  Future<UserInfo?> getUserInfo() async {
+  Future<UserEntity?> getUserInfo() async {
     final userJson = await box.read(APP_USER_INFO);
-    return userJson != null ? UserInfo.fromJson(json.decode(userJson)) : null;
+    return userJson != null ? UserEntity.fromJson(json.decode(userJson)) : null;
   }
 
-  Future<void> saveRefreshToken(String refreshToken) async {
-    box.write(USER_REFRESH_TOKEN, refreshToken);
+  Future<void> saveToken(String refreshToken) async {
+    box.write(USER_TOKEN, refreshToken);
   }
 
-  Future<String?> getRefreshToken() async {
-    final token = await box.read(USER_REFRESH_TOKEN);
+  Future<String?> getToken() async {
+    final token = await box.read(USER_TOKEN);
     return token;
   }
 
@@ -66,10 +71,11 @@ class AppStorage {
   }
 
   Future<void> logout() async {
+    print("USER_ACCESS_TOKEN::" + box.hasData(USER_TOKEN).toString());
     if (box.hasData(APP_LANGUAGE)) await box.remove(APP_LANGUAGE);
     if (box.hasData(APP_THEME)) await box.remove(APP_THEME);
-    if (box.hasData(USER_REFRESH_TOKEN)) await box.remove(USER_REFRESH_TOKEN);
+    if (box.hasData(USER_TOKEN)) await box.remove(USER_TOKEN);
     if (box.hasData(APP_USER_INFO)) await box.remove(APP_USER_INFO);
-    if (box.hasData(USER_ACCESS_TOKEN)) await box.remove(USER_ACCESS_TOKEN);
+    if (box.hasData(FCM_TOKEN)) await box.remove(FCM_TOKEN);
   }
 }

@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:shared/util/pretty_dio_logger.dart';
 
+import '../../share/util/pretty_dio_logger.dart';
 import 'api_constants.dart';
 import 'exceptions/errors.dart';
 
 class RestClient {
-  static const TIMEOUT = 30000;
+  static const TIMEOUT = 60000;
   static const ENABLE_LOG = true;
   static const ACCESS_TOKEN_HEADER = 'Authorization';
 
@@ -40,7 +40,7 @@ class RestClient {
   static Dio getDio({bool isUpload = false}) {
     var dio = Dio(instance.getDioBaseOption(isUpload: isUpload));
     if (ENABLE_LOG) {
-      dio.interceptors.add(PrettyDioLogger());
+      dio.interceptors.add(PrettyDioLogger(requestBody: true, responseBody: false));
     }
     dio.interceptors.add(AppInterceptors(dio));
     return dio;

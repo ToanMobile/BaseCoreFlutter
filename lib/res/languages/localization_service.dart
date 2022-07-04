@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import 'package:core/data/storage/app_storage.dart';
 import 'package:get/get.dart';
 
+import '../../data/storage/app_storage.dart';
 import 'st_en_us.dart';
 import 'st_vi_vn.dart';
 
@@ -23,11 +23,11 @@ class LocalizationService extends Translations {
   }
 
   Future<void> loadLanguage() async {
-    _language = EN_US; //await store.getLanguage();
+    _language = await store.getLanguage();
   }
 
   Locale? get getLocale {
-    if (_language.isNotEmpty) return Locale(_language);
+    //if (_language.isNotEmpty) return Locale(_language);
     return Get.deviceLocale;
   }
 

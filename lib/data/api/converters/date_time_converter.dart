@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:shared/constant/constant.dart';
-import 'package:shared/util/date_time_utils.dart';
+
+import '../../../share/constant/constant.dart';
+import '../../../share/util/date_time_utils.dart';
 
 class DateTimeConverter implements JsonConverter<DateTime, String> {
   const DateTimeConverter();
@@ -8,9 +9,9 @@ class DateTimeConverter implements JsonConverter<DateTime, String> {
   @override
   DateTime fromJson(String? strDate) {
     if (strDate == null) return null as DateTime;
-
-    final format = strDate.contains("T") ? DATE_TIME_FORMAT : DATE_FORMAT;
-    return parseDate(strDate, format)!;
+    final format = strDate.contains("T") ? DATE_TIME_FORMAT : DATE_TIME_FORMAT3;
+    final dateNew = parseDate(strDate, format, utc: false)!;
+    return dateNew;
   }
 
   @override
@@ -22,7 +23,7 @@ class DateConverter implements JsonConverter<DateTime, String> {
 
   @override
   DateTime fromJson(String strDate) {
-    return parseDate(strDate, DATE_FORMAT)!;
+    return parseDate(strDate, DATE_FORMAT, utc: false)!;
   }
 
   @override

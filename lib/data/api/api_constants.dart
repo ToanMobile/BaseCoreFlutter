@@ -1,72 +1,53 @@
-const BASE_URL_DEV = "BASE_URL";
-const UPLOAD_PHOTO_URL_DEV = "BASE_URL";
-const BASE_URL_PHOTO_DEV = "";
+// ignore_for_file: constant_identifier_names
 
-const BASE_URL_PROD = "BASE_URL_PRODUCTION"; // production
-const UPLOAD_PHOTO_URL_PROD = "BASE_URL"; //production
-const BASE_URL_PHOTO_PRO = "BASE_URL"; // production
+const BASE_URL_DEV = "https://tradein-api-dev.itads.io/";
+const UPLOAD_PHOTO_URL_DEV = "https://tradein-api-dev.itads.io/";
+const BASE_URL_PHOTO_DEV = "https://tradein-api-dev.itads.io/";
+
+//Production
+const BASE_URL_PROD = "https://tradein-api-dev.itads.io/"; // production
+const UPLOAD_PHOTO_URL_PROD = "https://tradein-api-dev.itads.io/"; //production
+const BASE_URL_PHOTO_PRO = "https://tradein-api-dev.itads.io/"; // production
 
 String PHOTO_URL = "";
 String? UPLOAD_PHOTO_URL;
+
+class EnvironmentConfig {
+  static const APP_NAME = String.fromEnvironment('DEFINE_APP_NAME', defaultValue: 'awesomeApp');
+  static const APP_SUFFIX = String.fromEnvironment('DEFINE_APP_SUFFIX', defaultValue: '');
+}
 
 const pageAndSize = "?page=%s&perPage=%s";
 const pageSizeAndFilter = "?page=%s&perPage=%s&filter=%s";
 
 //Login
-const LOGIN = "/auth/login";
+const LOGIN = "/auth/token";
 const REGISTER = "/auth/register";
-const VERIFY_EMAIL = "/auth/verifyEmail";
-const RESENT_CODE = "/auth/resendVerifyEmail";
-const FORTGOT_PASSWORD = "/auth/forgotPassword";
-const RESET_PASSWORD = "/auth/resetPassword";
-const LOGIN_FACEBOOK = "/auth/facebook?access_token=";
-const LOGIN_GOOGLE = "/auth/google?access_token=";
 const LOG_OUT = "/auth/logout";
-
-//Tab home
-const GET_NEW_LOOK = "/new-looks";
-const GET_BOUTIQUE = "/products/boutiques";
-const GET_VESTIUMS = "/outfit-boutique";
-const GET_PRODUCT = "/products";
-const GET_VES_SET = "/ves-sets";
-const GET_VES_BRAND = "/ves-brands";
-const GET_BRAND_DETAILS = "/brands/%s";
-
-//Tab favourite
-const GET_FAVOURITE = "/favourites$pageAndSize";
-const POST_FAVOURITE = "/favourites";
-const DELETE_FAVOURITE = "/favourites/%s/%s";
-
-//Tab calendar
-const GET_CALENDAR = "/calendars$pageAndSize";
-const POST_CALENDAR = "/calendars";
-const UPDATE_CALENDAR = "/calendars/%s";
-const DELETE_CALENDAR = "/calendars/%s";
-
-//Setting
-const GET_COLOR = "/colors/hsl-to-color?hsl=%s";
-
-//Tab Item
-const POST_PRODUCT = "/products";
-const UPLOAD_IMAGE = "/upload/optimize-image";
-const CATEGORY_CATEGORY = "/categories$pageSizeAndFilter";
-const CATEGORY_SUB_CATEGORY = "/categories$pageSizeAndFilter";
-const CATEGORY_COLOR = "/colors$pageAndSize";
-const CATEGORY_COLOR_SOURCE = "/colors/sources$pageAndSize";
-const CATEGORY_MATERIAL = "/material$pageAndSize";
-const CATEGORY_PATTERN = "/pattern$pageAndSize";
-const CATEGORY_BRAND = "/brands$pageAndSize";
-const CATEGORY_THICKNESS = "/thickness$pageAndSize";
-const CATEGORY_FEATURE = "/figures";
-
 //Profile
-const UPLOAD_AVATAR = "/upload/avatars";
-const EDIT_PROFILE = "/auth/me";
+const GET_PROFILE = "/users/me";
+const UPLOAD_VIN_ID = "/files/upload/files";
+const UPLOAD_MEDIA = "/files/upload/media";
+const UPLOAD_DOCUMENT = "/files/upload/document";
+//Request
+const GET_REQUEST = "/estimation-requests/%s";
+const CREATE_REQUEST = "/estimation-requests";
+const UPDATE_REQUEST = "/estimation-requests/%s";
+const SEARCH_VEHICLES = "/vehicles/search?vinId=%s";
+const GET_VEHICLES_BRAND = "/masters/vehicle-brands$pageAndSize";
+const GET_VEHICLES_MODEL = "/masters/vehicle-models$pageAndSize&year=%s&hashBrandId=%s";
+const GET_YEAR = "/masters/vehicle-manufacture-years?q=%s";
 
-//Filter
-const GET_SEASON = "/seasons$pageSizeAndFilter";
-const GET_OCCASION = "/occasions$pageAndSize";
-const GET_STYLES = "/styles$pageSizeAndFilter";
+//Common
+const GET_PROVINCES = "/provinces";
+const GET_INSURANCE_COMPANY = "/insurances/companies";
+const GET_INSURANCE_TYPE = "/insurances/types";
 
-//Get Details
-const GET_PRODUCT_DETAILS = "/products/%s";
+//Other
+const GET_NOTIFICATION = "/users/me/notifications";
+const GET_ESTIMATOR = "/estimators";
+const GET_ESTIMATION = "/estimation-requests$pageAndSize&status=%s";
+
+//Archive
+const POST_ARCHIVE = "estimation-requests/%s/archive";
+const POST_ACCEPT = "estimation-requests/%s/accept-suggestion-price";

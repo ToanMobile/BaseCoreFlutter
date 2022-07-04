@@ -1,8 +1,9 @@
-import 'package:core/controllers/base/base_controller.dart';
-import 'package:core/page/base/base_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:shared/constant/constant.dart';
+
+import '../../controllers/base/base_controller.dart';
+import '../../share/constant/constant.dart';
+import '../../ui/base/base_page.dart';
 
 abstract class BaseGridController<I> extends BaseController {
   int totalItem = 0;
@@ -69,8 +70,7 @@ abstract class BaseGridController<I> extends BaseController {
   }
 
   loadData({dynamic params, bool isClear = false}) async {
-    print(
-        "\n\n*************************** page: $page ***************************\n\n");
+    print("\n\n*************************** page: $page ***************************\n\n");
     try {
       final data = await getData();
       if (isClear) items.clear();
@@ -78,9 +78,9 @@ abstract class BaseGridController<I> extends BaseController {
         items.addAll(data!);
         page++;
       }
-      viewState.value = ViewState.loaded;
+      viewState?.value = ViewState.loaded;
     } catch (e) {
-      viewState.value = ViewState.error;
+      viewState?.value = ViewState.error;
     }
     isLoadMore.value = false;
   }
@@ -93,10 +93,10 @@ abstract class BaseGridController<I> extends BaseController {
         items.addAll(cacheData);
         page++;
       } else {
-        viewState.value = ViewState.error;
+        viewState?.value = ViewState.error;
       }
     } catch (e) {
-      viewState.value = ViewState.error;
+      viewState?.value = ViewState.error;
     }
     isLoadMore.value = false;
   }

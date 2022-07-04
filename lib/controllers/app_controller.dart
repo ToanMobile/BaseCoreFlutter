@@ -1,23 +1,28 @@
-import 'package:core/app/app_pages.dart';
-import 'package:core/app/base_app_config.dart';
-import 'package:core/data/api/api_constants.dart';
-import 'package:core/data/api/models/user_info.dart';
-import 'package:core/data/api/rest_client.dart';
-import 'package:core/data/storage/app_storage.dart';
-import 'package:core/res/languages/localization_service.dart';
-import 'package:core/res/style.dart';
+import 'dart:async';
+
+import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared/libraries/logger/flutter_logger.dart';
-import 'package:shared/libraries/photo_manager/photo_provider.dart';
-import 'package:shared/res/theme/app_theme.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+
+import '../app/app_pages.dart';
+import '../app/base_app_config.dart';
+import '../data/api/api_constants.dart';
+import '../data/api/models/response/login/user_entity.dart';
+import '../data/api/rest_client.dart';
+import '../data/storage/app_storage.dart';
+import '../res/languages/localization_service.dart';
+import '../res/style.dart';
+import '../share/libraries/logger/flutter_logger.dart';
+import '../share/libraries/photo_manager/photo_provider.dart';
+import '../share/res/theme/app_theme.dart';
 
 class AppController extends GetxController {
   Environment? env;
   Rx<Locale?>? locale;
   Rx<ThemeData?>? themeData;
   Rx<AuthState> authState = AuthState.unauthorized.obs;
-  UserInfo? user; //Su dung kiem tra khi login,logout
+  UserEntity? user; //Su dung kiem tra khi login,logout
 
   init(Environment environment) async {
     env = environment;
@@ -29,6 +34,7 @@ class AppController extends GetxController {
     await initLanguage();
     await initAuth(storage);
     initPhotos();
+    //checkConnect();
   }
 
   void initLogger(Environment environment) {
@@ -42,18 +48,19 @@ class AppController extends GetxController {
 
   Future<void> initAuth(AppStorage storage) async {
     user = await storage.getUserInfo();
-    String? accessToken = await storage.getUserAccessToken();
+    String? accessToken = await storage.getToken();
     await initApi(accessToken);
+    Logger.e("initAuth:" + user.toString());
     if (accessToken != null && accessToken.isNotEmpty && user != null) {
       //await Get.find<UserRepository>().getMe(userId: user?.id ?? "");
-      Logger.d("accessToken:" + user.toString() + "user:" + (user?.id.toString() ?? ""));
-      authState.value = user?.id == null ? AuthState.uncompleted : AuthState.authorized;
+      Logger.d("accessToken:" + accessToken);
+      authState.value = JwtDecoder.isExpired(accessToken) ? AuthState.uncompleted : AuthState.authorized;
     } else {
       authState.value = AuthState.unauthorized;
     }
   }
 
-  Future<void> loginOrLogoutSuccess({UserInfo? mUser}) async {
+  Future<void> loginOrLogoutSuccess({UserEntity? mUser}) async {
     if (user != null) user = mUser;
     if (user != null) {
       //Case login
@@ -72,7 +79,7 @@ class AppController extends GetxController {
   }
 
   Future<void> initFirebase() async {
-    //Init Firebase
+    //TODO
     //await Firebase.initializeApp();
   }
 
@@ -84,12 +91,10 @@ class AppController extends GetxController {
     Get.put(PhotoProvider()).init();
   }
 
-  bool checkAuth() {
-    return user?.id != null;
-  }
+  bool checkAuth() => user?.hashId != null;
 
   //Thong tin quan ly user khi login,lien ket sdk netalo
-  updateUserInfo(UserInfo? user) {
+  updateUserInfo(UserEntity? user) {
     this.user = user;
   }
 
@@ -105,7 +110,6 @@ class AppController extends GetxController {
     await Get.put(ThemeService()).init(storage);
     final themeService = Get.find<ThemeService>();
     themeData = themeService.themeData.obs;
-    //Lang nghe su thay doi theme khi luu vao storage
     storage.box.listenKey(AppStorage.APP_THEME, (value) {
       if (value != null && themeData != null) {
         themeData!.value = appThemeData[themeService.getAppTheme(value)];
@@ -119,7 +123,6 @@ class AppController extends GetxController {
     await Get.put(LocalizationService()).init();
     final localeService = Get.find<LocalizationService>();
     locale = localeService.getLocale.obs;
-    //Lang nghe su thay doi theme khi luu vao storage
     localeService.store.box.listenKey(AppStorage.APP_LANGUAGE, (value) {
       if (value != null) locale!.value = Locale(value);
     });
@@ -150,5 +153,7 @@ class AppController extends GetxController {
     super.onClose();
   }
 }
+
+EventBus eventBus = EventBus();
 
 enum AuthState { unauthorized, authorized, uncompleted, new_install }

@@ -1,3 +1,9 @@
-export 'package:shared/res/style_core.dart';
-
-export 'assets.dart';
+export '/gen/assets.gen.dart';
+export '/gen/colors.gen.dart';
+export '/gen/fonts.gen.dart';
+export '/share/res/assets_core.dart';
+export '/share/res/colors_core.dart';
+export '/share/res/dimens.dart';
+export '/share/res/theme/text_theme.dart';
+export '/share/res/theme/theme_service.dart';
+export 'strings.dart';

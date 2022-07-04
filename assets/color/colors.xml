@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="pinkishGrey">#ccccccff</color>
+    <color name="steelGrey">#ff7f8489</color>
+    <color name="cherryRed">#ffeb0a1e</color>
+    <color name="buttonBg1">#1D1F20</color>
+    <color name="buttonBg2">#0E5EF5</color>
+    <color name="buttonBg3">#00000000</color>
+    <color name="background">#E5E5E5</color>
+    <color name="disabledColor">#ECECEC</color>
+    <color name="bgColor">#ffffff</color>
+    <color name="primaryColor">#131740</color>
+    <color name="dividerColor">#E7E7EA</color>
+    <color name="yellowColor">#FABB57</color>
+    <color name="greenColor">#0C7C59</color>
+    <color name="greenLightColor">#5AC07D</color>
+    <color name="redColor">#FF0022</color>
+    <color name="textGreyColor">#777777</color>
+</resources>

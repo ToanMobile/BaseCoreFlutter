@@ -1,9 +1,8 @@
-import 'package:core/page/home/binding/home_binding.dart';
-import 'package:core/page/home/home_page.dart';
-import 'package:core/page/login/binding/login_binding.dart';
-import 'package:core/page/login/login_page.dart';
-import 'package:core/page/splash/splash_page.dart';
 import 'package:get/get.dart';
+
+import '../ui/home/home_binding.dart';
+import '../ui/home/home_page.dart';
+import '../ui/splash/splash_page.dart';
 
 part 'app_routes.dart';
 
@@ -15,15 +14,13 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.LOGIN,
-      binding: LoginBinding(),
-      page: () => LoginPage(),
+      page: () => HomePage(),
+      binding: HomeBinding(),
     ),
-    GetPage(name: AppRoutes.HOME, page: () => HomePage(), binding: HomeBinding(), children: [
-      /*GetPage(
-        name: AppRoutes.PATH_DETAIL_ITEM,
-        page: () => DetailsPage(),
-        binding: DetailBinding(),
-      ),*/
-    ]),
+    GetPage(
+      name: AppRoutes.HOME,
+      page: () => HomePage(),
+      binding: HomeBinding(),
+    ),
   ];
 }
